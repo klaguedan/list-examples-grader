@@ -25,14 +25,14 @@ then
 
     if [[ $? != 0 ]]
     then
-        echo "ERROR with moving files into grading-area!!!"
+        echo "ERROR with moving files into grading-area!!! YOU FAILED."
     fi
 
     # Start Testing
     javac -cp $CPATH grading-area/*.java
     if [[ $? != 0 ]]
     then
-        echo "ERROR with compiling .java files!!!"
+        echo "ERROR with compiling .java files!!! YOU FAILED."
     fi
 
 
@@ -43,11 +43,16 @@ then
 
     grep "Failures: 1" grading-area/results.txt > grading-area/grade.txt
 
-    if [[ ]]
+    if [[ -s grading-area/grade.txt ]]
+    then
+        echo "YOU FAILED!!!!"
+    else
+        echo "YOU PASSED!!!!"
+    fi
 
     
 
     
 else
-    echo "Error! Correct file not recieved!"
+    echo "Error! Correct file not recieved! YOU FAILED."
 fi
