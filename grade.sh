@@ -20,16 +20,34 @@ then
     # Move everything into grading-area/
     studentcode="student-submission/listExamples.java"
     test="grading-area/TestListExamples.java"
-    echo $?
 
     cp -r $studentcode TestListExamples.java grading-area/
-    ls grading-area/
+
+    if [[ $? != 0 ]]
+    then
+        echo "ERROR with moving files into grading-area!!!"
+    fi
 
     # Start Testing
     javac -cp $CPATH grading-area/*.java
-    java -cp $CPATH org.junit.runner.JUnitCore $test 
+    if [[ $? != 0 ]]
+    then
+        echo "ERROR with compiling .java files!!!"
+    fi
 
-    ls grading-area/
+
+    java -cp $CPATH org.junit.runner.JUnitCore $test > grading-area/results.txt
+
+    echo ""
+    echo ""
+
+    grep "Failures: 1" grading-area/results.txt > grading-area/grade.txt
+
+    if [[ ]]
+
+    
+
+    
 else
     echo "Error! Correct file not recieved!"
 fi
